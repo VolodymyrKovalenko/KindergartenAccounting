@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add сhildren</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/var25_css.css"> <!-- підключи js нормально -->
+
+</head>
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+				<div style="margin-top: 30px" class="signIn">
+					<div class="signHead">
+						<h1 class="addNewSubdivision">Add parent</h1>
+					</div>
+
+					<form id="receiptForm" method="post" action="">
+                    <h6 style="margin-left: 25px">Select subdivision</h6>
+                        <select style="padding-left: 10px" name="subdivision_id" action="" id ="selectFason">
+                            {% for subdivis in subdivisions_html %}
+                                <option value="{{ subdivis.id }}">{{ subdivis.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="text" name="parent_surname" placeholder="Parent surname" value="{{ request.form.parent_surname }}">
+                        <input type="text" name="parent_name" placeholder="Parent name" value="{{ request.form.parent_name }}">
+                        <input type="text" name="parent_patronymic" placeholder="Parent patronymic" value="{{ request.form.parent_patronymic }}">
+
+                            <div class="signHead" style="margin-top: 20px;margin-bottom: 20px">
+						<h1 class="addNewSubdivision">Add children</h1>
+					        </div>
+                        <h6 style="margin-left: 25px">Selet kindergarten</h6>
+                        <select style="padding-left: 10px" name="kindergarten_id" action="" id ="">
+                            {% for kindergart in kindergartens_html %}
+                                <option value="{{ kindergart.id }}">{{ kindergart.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="text" name="child_surname" placeholder="Child surname" value="{{ request.form.child_surname }}">
+                        <input type="text" name="child_name" placeholder="Child name" value="{{ request.form.child_name }}">
+                        <input type="text" name="child_patronymic" placeholder="Child patronymic" value="{{ request.form.child_patronymic }}">
+{#                        <input type="number" name="payment_sum" placeholder="Payment sum" value="{{ request.form.payment_sum }}">#}
+
+
+                        <p><input type="submit" class="btn btn-primary" value="Create new application"></p>
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

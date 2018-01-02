@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add month report</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/var25_css.css"> <!-- підключи js нормально -->
+
+</head>
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+				<div style="margin-top: 80px" class="signIn">
+					<div class="signHead">
+						<h1 class="addNewSubdivision">Add month report</h1>
+					</div>
+
+					<form id="receiptForm" method="post" action="">
+                    <h6 style="margin-left: 25px;">Kindergarten name: {{ result_kindergarten[0].name }}</h6>
+                    <h6 style="margin-left: 25px;" id="kindergartenPrice" data-price = {{ result_kindergarten[0].price }} >Kindergarten price: {{ result_kindergarten[0].price }}</h6>
+                    <h6 style="margin-left: 25px">Select month:</h6>
+                        <select style="background-color: #906c88;" name="month_id" action="" id ="selectFason">
+                            {% for month in result_month %}
+                                <option id ="{{ month.id }}" value="{{ month.id }}" data-work-days = {{ month.number_of_work_days }}>{{ month.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                    <h6 style="margin-left: 25px">Number of work days: <span class="workDays"></span></h6>
+                    <h6 style="margin-left: 25px">Number of visiting days:</h6>
+
+{#                        <select style="padding-left: 10px" name="month_id" action="" id ="selectFason">#}
+{#                            {% for month in result_month %}#}
+{#                                <option>{{ month.number_of_work_days }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+                        <input style="background-color: #906c88;color: black;height: 37px" id="number" type="number" name="parent_surname" min = '0' placeholder="Number of days" value="{{ request.form.number_of_visiting_days }}">
+                        <h6 style="margin-left: 25px;">Payment summa: </h6>
+                        <input style="color: black;background-color: #906c88;color: black;height: 37px" id="price" name="payment_sum" type="text" disabled placeholder="Price">
+                        <p><input type="submit" class="btn btn-primary" value="Create new month report"></p>
+                    <script>
+
+                            let elem = document.getElementsByClassName('workDays')[0];
+                            let days = document.getElementById('selectFason');
+                            let temp = document.getElementById(days.value);
+                            let daysNumber = document.getElementById('number');
+                            let price1 = document.getElementById('price');
+                            let kndPrice = document.getElementById('kindergartenPrice');
+                            elem.innerHTML = temp.dataset.workDays;
+
+                                daysNumber.max = temp.dataset.workDays;
+                            days.onclick = function () {
+                                 temp = document.getElementById(days.value);
+
+                                elem.innerHTML = temp.dataset.workDays;
+                                daysNumber.max = temp.dataset.workDays;
+                            };
+                            daysNumber.oninput = function () {
+                                price1.value  = parseInt(kndPrice.dataset.price / temp.dataset.workDays * daysNumber.value);
+                            }
+
+
+
+                        </script>
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
